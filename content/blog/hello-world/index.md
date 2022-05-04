@@ -1,6 +1,6 @@
 ---
 title: Hello World, Hello Covid 19
-date: "2022-05-03T04:55:47.352Z"
+date: "2022-05-04T02:07:30.381Z"
 description: "这绝对是最后一个博客站了"
 ---
 
