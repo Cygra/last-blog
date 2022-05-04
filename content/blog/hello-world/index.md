@@ -16,7 +16,9 @@ description: "这绝对是最后一个博客站了"
 
 没有就没有吧，阅读量高起来的当然好，没人看就当是自己的知识积累存档和写作练习处吧。毕竟知识总要积累，写作也是必备的技能。
 
-2. 页面丑陋：所以这次用了和 [Overreacted](https://overreacted.io/) 一样的 Gatsby 脚手架 & 主题（甚至连部署也放到了 Gatsby Cloud）。一站式的体验还是很赞的👍。
+另外就是考虑在成熟的平台上往博客引流，例如 Twitter、脉脉等等。
+
+2. 页面丑陋：所以这次用了和 [Overreacted](https://overreacted.io/) 一样的 Gatsby 脚手架（[gatsby-starter-blog](https://github.com/gatsbyjs/gatsby-starter-blog)）（甚至连部署也放到了 Gatsby Cloud）。一站式的体验还是很赞的👍。
 
 不过既然号称是「前端工程师」，对页面设计有点 sense 还是好的。后面准备这方面多看看，提升一下。
 
