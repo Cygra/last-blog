@@ -31,7 +31,7 @@ description: "这绝对是最后一个博客站了"
 有就有吧，我写管我写。刚才研究了一下一个域名配置了多条 A 记录会怎么样，下次写一下。其实写作是一次和自己的对话，对于知识类的文章，写出来可以帮自己梳理整体架构，能写得明白说明是真的弄懂了。
 
 这次长期在家办公加五一假期，空闲时间决定重新来做这件事情。
-现在的站点架构，可以实现<del>提交 PR 并合并</del><sub>太麻烦了，我懒得弄 PR</sub>推送到 master 之后即可自动打包构建部署，基本没什么麻烦事了。
+现在的站点架构，可以实现<del><del>提交 PR 并合并</del><sub>太麻烦了，我懒得弄 PR</sub>推送到 master 之后</del>提交 PR 并合并（或者直接推送到 master）即可自动打包构建部署，基本没什么麻烦事了。
 花点时间把解析、SSL 也弄好了。现在是域名、DNS 解析、SSL 在腾讯云，部署在 Gastby Cloud。
 <span onMouseOver="this.style.background='white'" onMouseOut="this.style.background='var(--color-text)'" style="background: 'var(--color-text)'">（Gastby Cloud 老是获取不到我在腾讯云上配的 DNS 的状态，导致没法用 Gastby Cloud 提供的默认 SSL 证书。）</span>
 之后准备一有空闲就打开电脑，毕竟 13 寸的电脑也轻。
