@@ -22,7 +22,7 @@ description: "这绝对是最后一个博客站了"
 
 另外就是考虑在成熟的平台上往博客引流，例如 Twitter、脉脉等等。
 
-2. 页面丑陋：所以这次用了和 [Overreacted](https://overreacted.io/) 一样的 Gatsby 脚手架（[gatsby-starter-blog](https://github.com/gatsbyjs/gatsby-starter-blog)）（甚至连部署也放到了 Gatsby Cloud）。一站式的体验还是很赞的👍。
+2. 页面丑陋：所以这次用了和 [Overreacted](https://overreacted.io/) 一样的 Gatsby 脚手架（[gatsby-starter-blog](https://github.com/gatsbyjs/gatsby-starter-blog)）（甚至连部署也放到了 Gatsby Cloud）。一站式的体验还是很赞的 👍。
 
 不过既然号称是「前端工程师」，对页面设计有点 sense 还是好的。后面准备这方面多看看，提升一下。
 
@@ -33,7 +33,9 @@ description: "这绝对是最后一个博客站了"
 这次长期在家办公加五一假期，空闲时间决定重新来做这件事情。
 现在的站点架构，可以实现<del><del>提交 PR 并合并</del><sub>太麻烦了，我懒得弄 PR</sub>推送到 master 之后</del>提交 PR 并合并（或者直接推送到 master）即可自动打包构建部署，基本没什么麻烦事了。
 花点时间把解析、SSL 也弄好了。现在是域名、DNS 解析、SSL 在腾讯云，部署在 Gastby Cloud。
-<span onMouseOver="this.style.background='white'" onMouseOut="this.style.background='var(--color-text)'" style="background: 'var(--color-text)'">（Gastby Cloud 老是获取不到我在腾讯云上配的 DNS 的状态，导致没法用 Gastby Cloud 提供的默认 SSL 证书。）</span>
+<span onMouseOver="this.style.background='white'" onMouseOut="this.style.background='var(--color-text)'" style="background: var(--color-text); transition: 0.3s">
+（Gastby Cloud 老是获取不到我在腾讯云上配的 DNS 的状态，导致没法用 Gastby Cloud 提供的默认 SSL 证书。）
+</span>
 之后准备一有空闲就打开电脑，毕竟 13 寸的电脑也轻。
 
 年内最好能找到一个 Star 数大于 300 的，可以持续贡献的开源项目做起来。
@@ -48,7 +50,7 @@ description: "这绝对是最后一个博客站了"
 1. 上一个博客：<a name="1">https://github.com/Cygra/blog</a>
 2. Github Issues：<a name="2">https://github.com/Cygra/Cygra_la_Artis</a>
 3. https://github.com/Cygra/useful_git_commands
-4. 👍掘金：https://juejin.cn/user/325111174168302/posts
+4. 👍 掘金：https://juejin.cn/user/325111174168302/posts
 5. 👍Medium：https://medium.com/@cygraw
 6. SegmentFault：https://segmentfault.com/u/cygra
 

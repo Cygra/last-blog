@@ -32,12 +32,13 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-mermaid`,
           {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 630,
               showCaptions: true,
-              markdownCaptions: true
+              markdownCaptions: true,
             },
           },
           {
