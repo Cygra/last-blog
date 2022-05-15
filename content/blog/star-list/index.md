@@ -173,7 +173,7 @@ const getDisplay = ({
 > While the API provides multiple methods for authentication, we strongly recommend using OAuth for production applications.
 
 但是这个 OAuth 属实有点麻烦了哈，我们就只调一个接口，还是来点简单的，这里我找到了 [Basic Authentication](https://docs.github.com/en/rest/overview/other-authentication-methods#basic-authentication)。
-这种鉴权方式只需要 Github 用户名和一个 token，这个 token 是 Github 的 person access token，生成方式可以见[Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)。
+这种鉴权方式只需要 Github 用户名和一个 token，这个 token 是 Github 的 person access token，生成方式可以见 [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)。
 因为只需要更新指定 repo 中的文件，所以 scope 这里只选 repo 就行：
 
 ![只选 repo](./repo_only.png)
