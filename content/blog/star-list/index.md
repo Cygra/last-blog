@@ -1,6 +1,6 @@
 ---
-title: ⭐️终于把我所有 star 过的 repo 都整理出来啦
-date: "2022-05-08T09:00:42.189Z"
+title: ⭐️ 终于把我所有 star 过的 repo 都整理出来啦
+date: "2022-05-15T07:43:40.099Z"
 description: "基于 node.js, Github API, Github Actions 的定时任务"
 ---
 
@@ -36,8 +36,6 @@ description: "基于 node.js, Github API, Github Actions 的定时任务"
 
 3. 定时任务，每周执行一次脚本
 
-## 技术调研
-
 新建一个 repo 这个就不用说了，这里我新建的 repo 是 `star-list`，生成的 markdown 内容直接放 `README.md` 文件。
 明确了要做的事情，下面就是查文档了，一个一个来：
 
@@ -72,7 +70,7 @@ const { data } = await axios.get(
 )
 ```
 
-但是这个接口有分页处理，一次最多只能获取 100 个，所以写了一个递归，一直获取到最后一页为止：
+但是这个接口有分页处理，一次最多只能获取 100 个，所以写了一个递归，一直获取到最后一页（获取到当前页的条目数量小于 100）为止：
 
 ```javascript
 const getFullList = async (page, data) => {
@@ -99,7 +97,7 @@ const getFullList = async (page, data) => {
 |`html_url`| repo 对应的网页链接 |
 |`description`| repo 的 description |
 |`stargazers_count`| star 数字 |
-|`topics`| repo 的 topic，可以理解为关键字 |
+|`topics`| repo 的 topic，如 `javascript` `react` `nodejs` `shell` 等 |
 
 ### 3. 根据获取到的所有 repo 生成 markdown 文件
 
@@ -150,19 +148,28 @@ const getDisplay = ({
 这里怕代码里直接放 emoji 会有问题，所以直接放了 emoji 对应的 unicode。
 没想到还是遇到了问题，有些 emoji 的 unicode 是 5 位（而不是 4 位），例如 [ `\u1f4d6` 📖](https://unicode.org/emoji/charts/full-emoji-list.html#1f4d6)。
 
-这其实是因为随着 unicode 字符的不断增多，原有的 4 位已经不能满足需求，这种表示称为代理对，参见：[UTF-16](https://zh.m.wikipedia.org/zh-sg/UTF-16)、[What is a "surrogate pair" in Java?](https://stackoverflow.com/questions/5903008/what-is-a-surrogate-pair-in-java)。
+这其实是因为随着 unicode 字符的不断增多，原有的 utf-8 已经不能满足需求，拓展了 utf-16，使用代理对（Surrogate Pair）的方式来展示。
+超出基本多语言平面（[BMP](<https://en.wikipedia.org/wiki/Plane_(Unicode)>)）的字符使用两个 16-bit 来编码为 utf-16。例如，`\u1f4d6` 📖 = `\uD83D + \uDCD6`。
 
-针对这个问题找到了一个[工具](http://www.russellcottrell.com/greek/utilities/SurrogatePairCalculator.htm)，可以在这两种表示之间相互转换：
+参见：
+
+- [UTF-16](https://zh.m.wikipedia.org/zh-sg/UTF-16)
+- [What is a "surrogate pair" in Java?](https://stackoverflow.com/questions/5903008/what-is-a-surrogate-pair-in-java)
+- [JavaScript’s internal character encoding: UCS-2 or UTF-16?](https://mathiasbynens.be/notes/javascript-encoding)
+
+针对这个问题写了一个[工具](https://cygra.github.io/surrogate-pair-calculator/)，可以在这两种表示之间相互转换：
 
 ![Surrogate Pair Calculator](./converter.png)
 
 <h3 id="4">4. 接口鉴权 </h3>
 
-下一步就是更新刚才新建的用来展示 star 列表的 repo 中的文件了。
+下一步就是把内容更新到刚才新建的用来展示 star 列表的 repo 文件中了。
 虽然获取所有 star 过的 repo 的接口没有鉴权，但是更新文件的接口不用看也能知道，肯定是需要鉴权的。
 
 看看 Github 文档怎么说：
 
+> https://docs.github.com/en/rest/overview/other-authentication-methods
+>
 > While the API provides multiple methods for authentication, we strongly recommend using OAuth for production applications.
 
 但是这个 OAuth 属实有点麻烦了哈，我们就只调一个接口，还是来点简单的，这里我找到了 [Basic Authentication](https://docs.github.com/en/rest/overview/other-authentication-methods#basic-authentication)。
@@ -171,7 +178,7 @@ const getDisplay = ({
 
 ![只选 repo](./repo_only.png)
 
-生成的 token 会展示在生成成功的页面上（只展示一次所以赶紧复制，保存好），后面再进来的时候这个页面长这样：
+生成的 token 会展示在生成成功的页面上（只展示一次，所以赶紧复制，保存好），后面再进来的时候这个页面长这样：
 
 ![Person Access Token](./pat.png)
 
@@ -251,7 +258,71 @@ await axios.put(
 
 下面，我们来解决定时执行脚本的问题。
 
-https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
-https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action#testing-out-your-action-in-a-workflow
-https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository
-https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#using-filters-to-target-specific-paths-for-pull-request-or-push-events
+### 6. 定时脚本
+
+就跑个脚本的事儿，所以还是想简单一点。
+看了腾讯云和 AWS 的 Serverless，感觉有点大材小用。
+想到了 Github Actions，找了一下[文档](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule)，发现 action 支持定时触发，也能执行 node.js 文件，正好。
+
+> https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+>
+> You can schedule a workflow to run at specific UTC times using POSIX cron syntax.
+
+支持使用 cron 配置执行频率。
+
+而且，Github Action 支持按仓库配置密钥，正好用来存储脚本中要用到 Github Personal Access Token。
+
+此外，Github 还提供了基于 JavaScript 脚本创建 action 的[文档](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action)，照着一步一步来就行，很清晰。
+
+文档里去掉新建 repo，写 hello world 等等的，其实就 3 步：
+
+- 配置文件：`action.yml`
+
+```yaml
+name: "Star List"
+description: "Render all my starred repos in README.md"
+inputs:
+  pat:
+    description: "Github Person Access Token"
+    required: true
+runs:
+  using: "node16"
+  main: "dist/index.js"
+```
+
+- 配置文件：`.github/workflows/main.yml`
+  - `secrets` 用来获取在 repo 里配置的密钥，[文档](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
+  - `cron:` 填定时任务执行频率
+  - 为了能够手动触发，所以在 `on` 里增加了 `workflow_dispatch`
+
+```yaml
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:
+
+jobs:
+  star_list_job:
+    runs-on: ubuntu-latest
+    name: A job to get starred repos and update README
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run index.js
+        uses: ./
+        id: star-list
+        with:
+          pat: ${{ secrets.pat }}
+```
+
+- 安装依赖 `@actions/core`，接收 `action.yml` 配置的输入（例如 personal access token）
+
+```javascript
+const core = require("@actions/core")
+
+const pat = core.getInput("pat") // 对应前面配置文件里的 `pat`
+```
+
+然后就 ok 啦。代码推到 Github，手动执行 action 测试了一下没啥问题。
+
+完整代码：https://github.com/Cygra/star-list 。
