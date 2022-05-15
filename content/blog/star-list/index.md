@@ -16,7 +16,7 @@ description: "基于 node.js, Github API, Github Actions 的定时任务"
 </span>
 
 不知不觉在 Github 上已经点了四百多个 star，各种各样的 repo 都有。
-但是，Github 网页上的 star 列表太难用了，筛选框只有 Type、language 筛选和排序，也没有分页器。
+但是，Github 网页上的 star 列表太难用了，筛选框只有 Type、Language 筛选和排序，也没有分页器。
 
 ![Github Star 列表的筛选和排序](./github_star_list.png)
 
