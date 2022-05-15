@@ -4,7 +4,7 @@ date: "2022-05-15T07:43:40.099Z"
 description: "基于 node.js, Github API, Github Actions 的定时任务"
 ---
 
-源代码在 [https://github.com/Cygra/star-list](https://github.com/Cygra/star-list)，fork 之后改改 `.github/workflows/main.yml` 里的参数就能直接用哈，欢迎 star / fork。
+完整代码在 [https://github.com/Cygra/star-list](https://github.com/Cygra/star-list)，fork 之后改改 `.github/workflows/main.yml` 里的参数就能直接用哈，欢迎 star / fork。
 
 ---
 
